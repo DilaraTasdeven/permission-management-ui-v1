@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yetki Merkezi - Önizleme</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Ana menü">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+              <path d="M12 3 4.5 6.2v5.4c0 4.7 3.1 8.9 7.5 10.4 4.4-1.5 7.5-5.7 7.5-10.4V6.2L12 3Zm0 2.3 5.4 2.3v4c0 3.5-2.1 6.8-5.4 8.1-3.3-1.3-5.4-4.6-5.4-8.1v-4L12 5.3Zm3.5 5.1-4.2 4.2-1.8-1.8-1.2 1.2 3 3 5.4-5.4-1.2-1.2Z" />
+            </svg>
+          </span>
+          <div>
+            <strong>Yetki Merkezi</strong>
+            <span>RBAC yönetim paneli</span>
+          </div>
+        </div>
+
+        <nav class="nav-list">
+          <button class="nav-item is-active" data-view="dashboard">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 4h7v7H4V4Zm9 0h7v5h-7V4ZM4 13h7v7H4v-7Zm9-2h7v9h-7v-9Z" /></svg>
+            </span>
+            Dashboard
+          </button>
+          <button class="nav-item" data-view="users">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0 2c-3.3 0-6 1.7-6 3.8V20h12v-3.2C14 14.7 11.3 13 8 13Zm8.5-2a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm0 2c-.7 0-1.4.1-2 .3 1 .8 1.5 1.8 1.5 3V20h6v-2.7c0-2.4-2.5-4.3-5.5-4.3Z" /></svg>
+            </span>
+            Kullanıcılar
+          </button>
+          <button class="nav-item" data-view="roles">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-2V7a5 5 0 0 0-5-5Zm3 7H9V7a3 3 0 0 1 6 0v2Zm-3 4a2 2 0 0 1 1 3.7V19h-2v-2.3A2 2 0 0 1 12 13Z" /></svg>
+            </span>
+            Roller ve İzinler
+          </button>
+          <button class="nav-item" data-view="approvals">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z" /></svg>
+            </span>
+            Onaylar
+          </button>
+          <button class="nav-item" data-view="critical">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2 1 21h22L12 2Zm1 15h-2v-2h2v2Zm0-4h-2V8h2v5Z" /></svg>
+            </span>
+            Kritik Loglar
+          </button>
+          <button class="nav-item" data-view="audit">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM8 11h8v2H8v-2Zm0 4h8v2H8v-2Zm0-8h4v2H8V7Z" /></svg>
+            </span>
+            Denetim
+          </button>
+          <button class="nav-item" data-view="settings">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m19.4 13.5.1-1.5-.1-1.5 2-1.5-2-3.5-2.4 1a8 8 0 0 0-2.6-1.5L14 2h-4l-.4 2.5A8 8 0 0 0 7 6L4.6 5 2.6 8.5l2 1.5-.1 1.5.1 1.5-2 1.5 2 3.5 2.4-1a8 8 0 0 0 2.6 1.5L10 22h4l.4-2.5A8 8 0 0 0 17 18l2.4 1 2-3.5-2-1.5ZM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5Z" /></svg>
+            </span>
+            Ayarlar
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <span class="status-dot"></span>
+          <span>Canlı prototip</span>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="page-title">
+            <h1>Seviye, rol ve izin kontrolü</h1>
+          </div>
+
+          <div class="topbar-actions">
+            <form class="search" id="globalSearchForm" role="search">
+              <button class="search-submit" type="submit" aria-label="Ara">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4a6 6 0 1 1-3.6 10.8l-3.1 3.1-1.4-1.4 3.1-3.1A6 6 0 0 1 10 4Zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" /></svg>
+              </button>
+              <input id="globalSearch" type="search" placeholder="Kullanıcı, rol veya seviye ara" autocomplete="off" />
+            </form>
+            <div class="company-control">
+              <select id="companySelect" hidden>
+                <option>Nova Teknoloji A.Ş.</option>
+                <option>Atlas Lojistik</option>
+                <option>Mercan Sağlık</option>
+                <option>İleri Eğitim</option>
+                <option>Vera Finans</option>
+                <option>Orion E-Ticaret</option>
+              </select>
+              <button class="company-picker-button" id="companyPickerButton" type="button" aria-haspopup="menu" aria-expanded="false">
+                <span>
+                  <small>Firma</small>
+                  <strong id="selectedCompanyLabel">Nova Teknoloji A.Ş.</strong>
+                </span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5H7Z" /></svg>
+              </button>
+              <div class="company-picker-menu" id="companyPickerMenu" role="menu" hidden>
+                <div class="company-options" id="companyOptions"></div>
+                <form class="company-add-form" id="companyAddForm">
+                  <input id="companyNameInput" type="text" placeholder="Yeni firma" autocomplete="off" />
+                  <button type="submit">Ekle</button>
+                </form>
+              </div>
+            </div>
+            <button class="icon-button" type="button" aria-label="Bildirimler">
+              <svg viewBox="0 0 24 24"><path d="M18 16v-5a6 6 0 0 0-5-5.9V3h-2v2.1A6 6 0 0 0 6 11v5l-2 2v1h16v-1l-2-2Zm-6 6a3 3 0 0 0 3-2H9a3 3 0 0 0 3 2Z" /></svg>
+            </button>
+            <div class="avatar" title="Sistem Yöneticisi">SY</div>
+          </div>
+        </header>
+
+        <div class="search-notice" id="searchNotice" role="status" aria-live="polite" hidden>
+          <span id="searchNoticeText"></span>
+          <button class="notice-close" id="closeSearchNotice" type="button" aria-label="Uyarıyı kapat">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Zm12.6 1.4L6.4 19 5 17.6 17.6 5 19 6.4Z" /></svg>
+          </button>
+        </div>
+
+        <section class="view is-visible" data-view-panel="dashboard">
+          <div class="metric-grid">
+            <article class="metric-card">
+              <span class="metric-icon teal">
+                <svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4 0-8 2-8 5v1h16v-1c0-3-4-5-8-5Z" /></svg>
+              </span>
+              <div>
+                <span>Aktif kullanıcı</span>
+                <strong id="activeUsers">2</strong>
+              </div>
+            </article>
+            <article class="metric-card">
+              <span class="metric-icon blue">
+                <svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3Zm-1 14.5-3.5-3.5 1.4-1.4 2.1 2.1 4.6-4.6 1.4 1.4-6 6Z" /></svg>
+              </span>
+              <div>
+                <span>Yetki seviyesi</span>
+                <strong id="levelCount">4</strong>
+              </div>
+            </article>
+            <button class="metric-card metric-button" type="button" data-view="approvals">
+              <span class="metric-icon amber">
+                <svg viewBox="0 0 24 24"><path d="M12 2 1 21h22L12 2Zm1 15h-2v-2h2v2Zm0-4h-2V8h2v5Z" /></svg>
+              </span>
+              <div>
+                <span>Bekleyen onay</span>
+                <strong id="approvalCount">14</strong>
+              </div>
+            </button>
+            <button class="metric-card metric-button" type="button" data-view="critical">
+              <span class="metric-icon rose">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14l4-4h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-2 8H7V9h10v2Zm-4 3H7v-2h6v2Zm4-6H7V6h10v2Z" /></svg>
+              </span>
+              <div>
+                <span>Kritik log</span>
+                <strong id="criticalCount">3</strong>
+              </div>
+            </button>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel panel-wide">
+              <div class="panel-header">
+                <div>
+                  <h2>İzin Matrisi</h2>
+                  <p id="matrixSubtitle">Seviye 2 - Operasyon için modül bazlı izinler</p>
+                </div>
+                <div class="level-picker" id="levelPicker">
+                  <button class="level-picker-button" id="levelPickerButton" type="button" aria-haspopup="menu" aria-expanded="false">
+                    <span>
+                      <small>Yetki seviyesi</small>
+                      <strong id="selectedLevelLabel">Seviye 2 - Operasyon</strong>
+                    </span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5H7Z" /></svg>
+                  </button>
+                  <div class="level-picker-menu" id="levelPickerMenu" role="menu" hidden>
+                    <button class="level-option" type="button" role="menuitem" data-level-option="Seviye 1 - Görüntüleme">
+                      <strong>Seviye 1</strong>
+                      <span>Görüntüleme</span>
+                    </button>
+                    <button class="level-option is-active" type="button" role="menuitem" data-level-option="Seviye 2 - Operasyon">
+                      <strong>Seviye 2</strong>
+                      <span>Operasyon</span>
+                    </button>
+                    <button class="level-option" type="button" role="menuitem" data-level-option="Seviye 3 - Onay Yetkisi">
+                      <strong>Seviye 3</strong>
+                      <span>Onay Yetkisi</span>
+                    </button>
+                    <button class="level-option" type="button" role="menuitem" data-level-option="Seviye 4 - Tam Yetki">
+                      <strong>Seviye 4</strong>
+                      <span>Tam Yetki</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="permission-table-wrap">
+                <table class="permission-table">
+                  <thead>
+                    <tr>
+                      <th>Modül</th>
+                      <th>Gör</th>
+                      <th>Oluştur</th>
+                      <th>Düzenle</th>
+                      <th>Sil</th>
+                      <th>Onayla</th>
+                      <th>Dışa aktar</th>
+                    </tr>
+                  </thead>
+                  <tbody id="permissionBody"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header compact">
+                <div>
+                  <h2>Seçili Seviye</h2>
+                  <p id="levelSummary">Operasyonel izinler açık</p>
+                </div>
+              </div>
+              <div class="role-card">
+                <span id="levelBadge" class="badge badge-amber">Seviye 2</span>
+                <strong id="levelTitle">Operasyon Seviyesi</strong>
+                <p id="levelCopy">Günlük kullanıcı işlemleri, temel raporlar ve sınırlı kayıt güncelleme.</p>
+                <div class="progress-block">
+                  <div class="progress-label">
+                    <span>Yetki kapsamı</span>
+                    <strong id="coverageValue">100%</strong>
+                  </div>
+                  <div class="progress-track">
+                    <span id="coverageBar" style="width: 100%"></span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" data-view-panel="approvals">
+          <section class="panel">
+            <div class="panel-header">
+              <div class="approval-heading">
+                <div>
+                  <h2>Onaylar</h2>
+                  <p id="approvalViewSubtitle">Bekleyen yetki talepleri ve kritik işlem onayları</p>
+                </div>
+                <div class="segmented approval-tabs" aria-label="Onay durumu">
+                  <button class="is-active" type="button" data-approval-view="pending">Bekleyenler <span id="approvalPendingCount">14</span></button>
+                  <button type="button" data-approval-view="approved">Onaylananlar <span id="approvalApprovedCount">0</span></button>
+                  <button type="button" data-approval-view="rejected">Reddedilenler <span id="approvalRejectedCount">0</span></button>
+                </div>
+              </div>
+              <button class="secondary-button" type="button" data-view="dashboard">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5 5 12l7 7 1.4-1.4L8.8 13H19v-2H8.8l4.6-4.6L12 5Z" /></svg>
+                Dashboard
+              </button>
+            </div>
+            <div class="review-list" id="approvalList"></div>
+          </section>
+        </section>
+
+        <section class="view" data-view-panel="critical">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Kritik Loglar</h2>
+                <p>Reddedilen erişimler, şüpheli girişler ve güvenlik olayları</p>
+              </div>
+              <button class="secondary-button" type="button" data-view="audit">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM8 11h8v2H8v-2Zm0 4h8v2H8v-2Zm0-8h4v2H8V7Z" /></svg>
+                Tüm loglar
+              </button>
+            </div>
+            <div class="review-list" id="criticalLogList"></div>
+          </section>
+        </section>
+
+        <section class="view" data-view-panel="users">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Kullanıcı Yönetimi</h2>
+                <p>Aktiflik, rol ataması ve kişi bazlı yetki seviyesi</p>
+              </div>
+              <button class="primary-button" id="openUserModal" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2h6Z" /></svg>
+                Yeni kullanıcı
+              </button>
+            </div>
+            <div class="table-toolbar">
+              <div class="segmented" aria-label="Durum filtresi">
+                <button class="is-active" data-filter="all">Tümü</button>
+                <button data-filter="active">Aktif</button>
+                <button data-filter="passive">Pasif</button>
+              </div>
+            </div>
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Kullanıcı</th>
+                    <th>Rol</th>
+                    <th>Yetki seviyesi</th>
+                    <th>Son giriş</th>
+                    <th>Durum</th>
+                  </tr>
+                </thead>
+                <tbody id="userTable"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" data-view-panel="roles">
+          <div class="roles-layout">
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Rol Kataloğu</h2>
+                  <p>Her sektöre uyarlanabilir rol şablonları</p>
+                </div>
+                <button class="secondary-button" type="button" id="addRoleButton">
+                  <svg viewBox="0 0 24 24"><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2h6Z" /></svg>
+                  Rol ekle
+                </button>
+              </div>
+              <div class="role-list" id="roleList"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header compact">
+                <div>
+                  <h2>Politika Akışı</h2>
+                  <p>API ve arayüz için kontrol sırası</p>
+                </div>
+              </div>
+              <ol class="policy-flow">
+                <li>
+                  <span>1</span>
+                  <div>
+                    <strong>Kimlik doğrulama</strong>
+                    <p>Oturum, token ve kullanıcı durumu doğrulanır.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>2</span>
+                  <div>
+                    <strong>Seviye çözümleme</strong>
+                    <p>Kullanıcının kişi bazlı yetki seviyesi, rolleri ve tenant kapsamı okunur.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>3</span>
+                  <div>
+                    <strong>İzin kontrolü</strong>
+                    <p>Modül, sayfa ve işlem seviyesinde policy çalışır.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>4</span>
+                  <div>
+                    <strong>Audit log</strong>
+                    <p>Başarılı ve reddedilen kritik işlemler kaydedilir.</p>
+                  </div>
+                </li>
+              </ol>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" data-view-panel="audit">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Denetim Kayıtları</h2>
+                <p>Yetki değişiklikleri ve kritik erişim hareketleri</p>
+              </div>
+              <button class="secondary-button" type="button">
+                <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2ZM19 9h-4V3H9v6H5l7 7 7-7Z" /></svg>
+                Dışa aktar
+              </button>
+            </div>
+            <div class="audit-list" id="auditList"></div>
+          </section>
+        </section>
+
+        <section class="view" data-view-panel="settings">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Güvenlik Ayarları</h2>
+                <p>Oturum, parola ve erişim politikaları</p>
+              </div>
+            </div>
+            <div class="settings-grid">
+              <label class="setting-row">
+                <span>
+                  <strong>Çok faktörlü doğrulama</strong>
+                  <small>Admin ve kritik roller için zorunlu</small>
+                </span>
+                <input type="checkbox" checked />
+              </label>
+              <label class="setting-row">
+                <span>
+                  <strong>IP kısıtlama</strong>
+                  <small>Tenant bazlı güvenli ağ listesi</small>
+                </span>
+                <input type="checkbox" />
+              </label>
+              <label class="setting-row">
+                <span>
+                  <strong>Oturum zaman aşımı</strong>
+                  <small>Pasif oturumlar 30 dakikada sonlanır</small>
+                </span>
+                <input type="checkbox" checked />
+              </label>
+              <label class="setting-row">
+                <span>
+                  <strong>Kritik işlem onayı</strong>
+                  <small>Rol silme ve izin yükseltmede ikinci onay</small>
+                </span>
+                <input type="checkbox" checked />
+              </label>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="userModal" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="userModalTitle">
+        <div class="modal-header">
+          <h2 id="userModalTitle">Yeni kullanıcı</h2>
+          <button class="icon-button" id="closeUserModal" type="button" aria-label="Kapat">
+            <svg viewBox="0 0 24 24"><path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Zm12.6 1.4L6.4 19 5 17.6 17.6 5 19 6.4Z" /></svg>
+          </button>
+        </div>
+        <form id="userForm" class="modal-form">
+          <div class="form-notice" id="userFormNotice" role="alert" hidden></div>
+          <label>
+            <span>Ad soyad</span>
+            <input name="name" required placeholder="Örn. Deniz Kaya" />
+          </label>
+          <label>
+            <span>E-posta</span>
+            <input name="email" type="email" required placeholder="deniz@firma.com" />
+          </label>
+          <label>
+            <span>Firma</span>
+            <select id="newUserCompany" name="company">
+              <option>Nova Teknoloji A.Ş.</option>
+              <option>Atlas Lojistik</option>
+              <option>Mercan Sağlık</option>
+              <option>İleri Eğitim</option>
+              <option>Vera Finans</option>
+              <option>Orion E-Ticaret</option>
+            </select>
+          </label>
+          <label>
+            <span>Rol</span>
+            <select name="role">
+              <option>Operasyon</option>
+              <option>Raporlama</option>
+              <option>Admin</option>
+              <option>Denetçi</option>
+            </select>
+          </label>
+          <label>
+            <span>Yetki seviyesi</span>
+            <select name="level">
+              <option>Seviye 1 - Görüntüleme</option>
+              <option selected>Seviye 2 - Operasyon</option>
+              <option>Seviye 3 - Onay Yetkisi</option>
+              <option>Seviye 4 - Tam Yetki</option>
+            </select>
+          </label>
+          <label class="form-switch-row">
+            <span class="switch-copy">
+              <strong>Aktif kullanıcı</strong>
+              <small>Kullanıcı sisteme giriş yapabilir</small>
+            </span>
+            <span class="status-switch">
+              <input id="newUserStatus" name="isActive" type="checkbox" checked />
+              <span class="status-switch-track"></span>
+              <span class="status-switch-text">Aktif</span>
+            </span>
+          </label>
+          <div class="modal-actions">
+            <button class="secondary-button" type="button" id="cancelUserModal">Vazgeç</button>
+            <button class="primary-button" type="submit">Kaydet</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="companyDeleteModal" aria-hidden="true">
+      <div class="modal confirm-modal" role="dialog" aria-modal="true" aria-labelledby="companyDeleteTitle">
+        <div class="modal-header">
+          <h2 id="companyDeleteTitle">Firma silinsin mi?</h2>
+          <button class="icon-button" id="closeCompanyDeleteModal" type="button" aria-label="Kapat">
+            <svg viewBox="0 0 24 24"><path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Zm12.6 1.4L6.4 19 5 17.6 17.6 5 19 6.4Z" /></svg>
+          </button>
+        </div>
+        <p class="confirm-copy" id="companyDeleteCopy"></p>
+        <div class="confirm-actions">
+          <button class="secondary-button" id="cancelCompanyDelete" type="button">Vazgeç</button>
+          <button class="danger-button" id="confirmCompanyDelete" type="button">Firmayı sil</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

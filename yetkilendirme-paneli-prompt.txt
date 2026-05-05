@@ -1,0 +1,135 @@
+Bana sektor bagimsiz kullanilabilecek, firma bazli calisan bir yetkilendirme yonetim paneli olustur.
+
+Ana amac:
+Farkli firmalar icin ayri ayri kullanici, rol, seviye ve izin yonetimi yapilabilen modern bir web uygulamasi tasarla. Sistem tek bir sektore bagli olmasin; her firma kendi kullanicilarina, yetki seviyelerine ve izin matrisine sahip olsun.
+
+Genel yapi:
+- Modern, sade ve kurumsal bir admin paneli tasarla.
+- Sol menude su sayfalar olsun:
+  - Dashboard
+  - Kullanicilar
+  - Roller ve Izinler
+  - Onaylar
+  - Kritik Loglar
+  - Denetim
+  - Ayarlar
+
+Firma yapisi:
+- Sag ustte firma secimi olsun.
+- Firma secimi ozel bir acilir pencere seklinde olsun.
+- Acilir pencerenin icinde firma listesi gosterilsin.
+- Acilir pencerenin en altinda "Yeni firma" ekleme alani olsun.
+- Yeni firma eklendiginde firma listesine otomatik eklensin.
+- Eklenen firma, kullanici ekleme formundaki firma listesine de otomatik eklensin.
+- Firma silme ozelligi olsun.
+- Firma silinirken kullanici dostu bir onay penceresi acilsin.
+- Onay penceresinde firmaya bagli kac kullanici oldugu gosterilsin.
+- Son kalan firma silinemesin.
+- Bir firma silinirse o firmaya bagli kullanicilar ve firmaya ozel izin ayarlari kaldirilmis kabul edilsin.
+
+Firma bazli ayrim:
+- Bir firmada yapilan izin degisikligi baska firmaya yansimasin.
+- Her firmanin kendi yetki seviyesi ve izin matrisi bagimsiz calissin.
+- Firma degistirildiginde kullanici listesi, aktif kullanici sayisi ve izin matrisi secili firmaya gore guncellensin.
+
+Yetki seviyesi yapisi:
+- Yetkilendirme sadece rol bazli degil, kisi/seviye bazli da calissin.
+- Kullaniciya kayit sirasinda yetki seviyesi atanabilsin.
+- Yetki seviyeleri:
+  - Seviye 1 - Goruntuleme
+  - Seviye 2 - Operasyon
+  - Seviye 3 - Onay Yetkisi
+  - Seviye 4 - Tam Yetki
+- Dashboard'daki izin matrisi seviye bazli calissin.
+- Seviye secimi acilir pencere seklinde olsun.
+- Seviye secildiginde izin matrisi ve seviye ozeti guncellensin.
+
+Izin matrisi:
+- Her firma icin her seviye ayri izin matrisine sahip olsun.
+- Moduller:
+  - Dashboard
+  - Kullanicilar
+  - Roller
+  - Raporlar
+  - Ayarlar
+  - Audit Log
+- Izin turleri:
+  - Gor
+  - Olustur
+  - Duzenle
+  - Sil
+  - Onayla
+  - Disa aktar
+- Izinler switch/toggle seklinde acilip kapatilabilsin.
+- Bir firmada Seviye 2 icin yapilan izin degisikligi baska firmadaki Seviye 2'ye yansimasin.
+
+Kullanici yonetimi:
+- Kullanicilar secili firmaya gore listelensin.
+- Kullanici ekleme modali olsun.
+- Yeni kullanici eklerken su bilgiler girilsin:
+  - Ad soyad
+  - E-posta
+  - Firma
+  - Rol
+  - Yetki seviyesi
+  - Aktif/Pasif durumu
+- Aktif/Pasif durumu switch seklinde secilsin.
+- Kullanicilar tablosunda Aktif/Pasif durumu switch olarak degistirilebilsin.
+- Ayni e-posta adresi farkli firmada ikinci kez kayit edilemesin.
+- Ayni kisi baska firmaya eklenmeye calisilirsa kullanici dostu uyari gosterilsin.
+
+Arama:
+- Dashboard ustunde "Kullanici, rol veya seviye ara" alani olsun.
+- Kullanici bulunursa Kullanicilar sayfasina gecilsin.
+- Rol bulunursa Roller ve Izinler sayfasina gecilsin.
+- Bulunamazsa kapatilabilir bir uyari mesaji gosterilsin.
+- Bulunan sonuclarda basari mesaji gosterilmesin.
+
+Dashboard:
+- Ustte metrik kartlari olsun:
+  - Aktif kullanici
+  - Yetki seviyesi
+  - Bekleyen onay
+  - Kritik log
+- Bekleyen onay kartina tiklaninca Onaylar sayfasina gidilsin.
+- Kritik log kartina tiklaninca Kritik Loglar sayfasina gidilsin.
+- Dashboard'da "sektorden bagimsiz yetkilendirme" gibi aciklayici slogan yazisi olmasin.
+
+Onaylar sayfasi:
+- Bekleyen yetki talepleri listelensin.
+- Her talepte talep eden kisi, modul, oncelik ve zaman bilgisi olsun.
+- Onayla ve Reddet butonlari olsun.
+- Islem yapilinca sayac guncellensin.
+
+Kritik Loglar sayfasi:
+- Kritik guvenlik olaylari listelensin.
+- Her olayda kaynak, aktor, zaman ve onem seviyesi gosterilsin.
+- "Cozuldu" butonu olsun.
+- Cozulen kayitlar pasif/cozulmus gorunsun.
+- Sayac islem sonrasi guncellensin.
+
+Denetim sayfasi:
+- Yetki degisiklikleri, rol atamalari, giris denemeleri ve rapor disa aktarma gibi audit log kayitlari gosterilsin.
+
+Ayarlar sayfasi:
+- Cok faktorlu dogrulama
+- IP kisitlama
+- Oturum zaman asimi
+- Kritik islem onayi
+gibi guvenlik ayarlari switch olarak gosterilsin.
+
+Tasarim beklentisi:
+- Modern, sade, profesyonel ve kurumsal bir admin paneli olsun.
+- Kartlar, tablolar, switchler, modal pencereler ve dropdownlar kullanici dostu olsun.
+- Gereksiz aciklama metinleriyle ekran kalabaliklastirilmasin.
+- Responsive calissin.
+- Mobilde tablolar tasmadan kullanilabilsin.
+- Butonlar, switchler ve acilir pencereler anlasilir olsun.
+- Silme gibi riskli islemler onay penceresi olmadan yapilmasin.
+
+Teknik beklenti:
+- HTML, CSS ve JavaScript ile calisan tek sayfalik bir prototip olustur.
+- Veriler frontend icinde ornek veri olarak tutulabilir.
+- Firma bazli izinler birbirinden bagimsiz saklansin.
+- Kullanici listesi secili firmaya gore filtrelensin.
+- Yeni firma ekleme, firma silme, kullanici ekleme, kullanici aktif/pasif degistirme ve izin matrisi guncelleme dinamik calissin.

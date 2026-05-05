@@ -1,4 +1,4 @@
-RBAC Authorization Panel
+RBAC AUTHORIZATION PANEL
 
 Biga Bilişim bünyesinde geliştirilmiş, firma bazlı kullanıcı, rol ve yetki yönetimi sağlayan modern bir RBAC yönetim paneli.
 
